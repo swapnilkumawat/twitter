@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to '/', notice: 'User was successfully created.'
+      redirect_to '/', notice: 'Signed up successfully.'
     else
       render 'new'
     end

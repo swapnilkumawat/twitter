@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create]
 
+  resources :tweets
+
   get 'login', to: 'sessions#new', as: 'login'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
   get '/signup' => 'users#new'

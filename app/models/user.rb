@@ -5,4 +5,6 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50, minimum: 3 }
   validates :password, length: { minimum: 6 }, presence: true
 
+  has_many :tweets
+
 end
