@@ -17,13 +17,13 @@
     <ul class="navbar-nav mr-ul mx-3">
       <% if current_user.present? %>
         <li class="nav-item">
-          <%= link_to '/', class: 'nav-link waves-effect waves-light' do %>
-            <i class="fas fa-user"></i>
+          <%= link_to logout_path, data: { method: 'delete' }, class: 'nav-link waves-effect waves-light' do %>
+            Logout
           <% end %>
         </li>
       <% else %>
         <li class="nav-item">
-          <%= link_to '/', class: 'nav-link waves-effect waves-light' do %>
+          <%= link_to login_path, class: 'nav-link waves-effect waves-light' do %>
             Login
           <% end %>
         </li>
