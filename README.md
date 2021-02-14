@@ -5,20 +5,16 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version - 2.7.2
 
-* System dependencies
+* Rails version - 5.2.0
 
-* Configuration
+Setup Steps
 
-* Database creation
+* bundle install
 
-* Database initialization
+* rails db:create
 
-* How to run the test suite
+* rails db:migrate
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Live URL - https://twitter-clone-swapnil.herokuapp.com/
