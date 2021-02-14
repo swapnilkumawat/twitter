@@ -8,4 +8,8 @@ class Tweet < ApplicationRecord
   
   has_many :retweets, as: :parent, class_name: 'Tweet'
 
+  has_many :comments
+
+  has_many :likes
+
 end

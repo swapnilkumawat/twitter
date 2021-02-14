@@ -4,9 +4,14 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:create]
 
-  resources :users, only: [:create]
+  resources :users, only: [:create, :show]
 
-  resources :tweets
+  resources :tweets do
+    member do
+      resources :comments
+      resources :likes
+    end
+  end
 
   get 'login', to: 'sessions#new', as: 'login'
   delete 'logout', to: 'sessions#destroy', as: 'logout'

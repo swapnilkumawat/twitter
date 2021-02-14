@@ -7,4 +7,12 @@ class User < ApplicationRecord
 
   has_many :tweets
 
+  has_many :comments
+
+  has_many :likes
+
+  def likes?(tweet)
+    tweet.likes.active.where(user_id: id).exists?
+  end
+
 end

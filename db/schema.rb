@@ -10,18 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_13_210402) do
+ActiveRecord::Schema.define(version: 2021_02_14_104221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "tweets", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id"
     t.bigint "tweet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tweet_id"], name: "index_tweets_on_tweet_id"
+    t.index ["tweet_id"], name: "index_comments_on_tweet_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "tweet_id"
+    t.boolean "active", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_likes_on_tweet_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "tweets", force: :cascade do |t|
+    t.text "content"
+    t.integer "parent_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_tweets_on_parent_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
@@ -36,6 +56,9 @@ ActiveRecord::Schema.define(version: 2021_02_13_210402) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "tweets", "tweets"
+  add_foreign_key "comments", "tweets"
+  add_foreign_key "comments", "users"
+  add_foreign_key "likes", "tweets"
+  add_foreign_key "likes", "users"
   add_foreign_key "tweets", "users"
 end

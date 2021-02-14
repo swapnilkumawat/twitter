@@ -1,6 +1,10 @@
 <% if @error.present? %>
   swal('<%= @error %>');
 <% else %>
-  swal("Tweet was posted successfully");
+  $('#tweet-feeds').prepend("<%= j render 'tweets/feed', tweet: @tweet %>");
   $('.tweet-input').val('');
+  $(".mid-tweet").css("cursor","default");
+  $(".mid-tweet").css("opacity","0.6");
+  $(".mid-tweet").addClass('disabled');
+  swal('Tweet was posted successfully');
 <% end %>

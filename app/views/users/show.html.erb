@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-6 mx-auto mx-2">
+    <div class="mid-2">
+      <div class="tweet-1 mx-2">
+        <img class="img user-img" src="<%= asset_path('user.png') %>" alt="">
+      </div>
+      <div class="tweet-2">
+        <div class="t-1">
+          <span class="name"><%= @user.name %></span>
+        </div>
+        <div class="t-1">
+          <span class="uname">@<%= @user.username %></span>
+        </div>
+        <div>
+          <b><%= @user.tweets.count %></b><span class="text-15 mt-2 joined-date"> Tweets</span>,
+          <span class="text-15 mt-2 joined-date">&nbsp;<i class="fas fa-calendar-week"></i> Joined <%= @user.created_at.strftime("%B, %Y") %></span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-2">
+      <div id="tweet-feeds">
+        <%= render 'tweets/tweet_feeds' %>
+      </div>
+    </div>
+  </div>
+</div>

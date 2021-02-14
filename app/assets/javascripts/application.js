@@ -16,16 +16,35 @@
 //= require_tree .
 
 $(document).ready(function(){
-  $(".tweet-input").keyup(function(){
-    if ($('.tweet-input').val().length > 0) {
-      $(".mid-tweet").css("cursor","pointer");
-      $(".mid-tweet").css("opacity","1");
-      $('.mid-tweet').removeClass('disabled');
+  $(".tweet-input, .reply-input").keyup(function(){
+    if ($('.tweet-input, .reply-input').val().length > 0) {
+      $(".mid-tweet, .mid-reply").css("cursor","pointer");
+      $(".mid-tweet, .mid-reply").css("opacity","1");
+      $(".mid-tweet, .mid-reply").removeClass('disabled');
     } else {
-      $(".mid-tweet").css("cursor","default");
-      $(".mid-tweet").css("opacity","0.6");
-      $('.mid-tweet').addClass('disabled');
+      $(".mid-tweet, .mid-reply").css("cursor","default");
+      $(".mid-tweet, .mid-reply").css("opacity","0.6");
+      $(".mid-tweet, .mid-reply").addClass('disabled');
     }
+  });
+
+  $(".fav").click(function(){
+    var tweet_id = $(this).find('input').val();
+    $.ajax({
+      type: 'POST',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      url: '/tweets/' + tweet_id + '/likes',
+      data: {},
+      dataType: "script",
+      success: function () {
+      },
+      error: function () {
+      }
+    });
+  });
+
+  $(".rt").click(function(){
+    $(this).css("color","rgb(48, 185, 48)");
   });
 
   $('.mid-tweet').click(function(){
@@ -34,6 +53,22 @@ $(document).ready(function(){
       type: 'POST',
       beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       url: '/tweets',
+      data: { 'content': content },
+      dataType: "script",
+      success: function () {
+      },
+      error: function () {
+      }
+    });
+  });
+
+  $('.mid-reply').click(function(){
+    var tweet_id = $('.tweet-id').val()
+    var content = $('.reply-input').val();
+    $.ajax({
+      type: 'POST',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      url: '/tweets/' + tweet_id + '/comments',
       data: { 'content': content },
       dataType: "script",
       success: function () {

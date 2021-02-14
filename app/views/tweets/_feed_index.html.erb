@@ -1,0 +1,41 @@
+<div class="tweet tb">
+  <div class="tweet-1 mx-2">
+    <img class="img user-img" src="<%= asset_path('user.png') %>" alt="">
+  </div>
+  <div class="tweet-2">
+    <div class="t-1">
+      <span class="name"><%= tweet.user.name %></span>
+      <span class="uname">@<%= tweet.user.username %></span>
+      <span class="uname"><%= time_ago_in_words(tweet.created_at) %></span>
+    </div>
+    <%= link_to tweet_path(tweet), class: 'tweet-content' do %>
+      <div class="t-2">
+        <span class="content"><%= tweet.content %></span>
+      </div>
+    <% end %>
+    <div class="t-3">
+      <div class="cmt">
+        <i class="far fa-comment"></i>
+        <span><%= tweet.comments.count %></span>
+      </div>
+      <div class="rt">
+        <i class="fas fa-retweet"></i>
+        <%= hidden_field_tag :tweet_id, tweet.id %>
+        <span>12k</span>
+      </div>
+      <% if current_user && current_user.likes?(tweet) %>
+        <div class="fav liked">
+          <i class="fas fa-heart"></i>
+          <%= hidden_field_tag :tweet_id, tweet.id %>
+          <span><%= tweet.likes.active.count %></span>
+        </div>
+      <% else %>
+        <div class="fav">
+          <i class="far fa-heart"></i>
+          <%= hidden_field_tag :tweet_id, tweet.id %>
+          <span><%= tweet.likes.active.count %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

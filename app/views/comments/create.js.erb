@@ -1,0 +1,10 @@
+<% if @error.present? %>
+  swal('<%= @error %>');
+<% else %>
+  $('#comments').append("<%= j render 'comments/show', comment: @comment %>");
+  $('.reply-input').val('');
+  $(".mid-reply").css("cursor","default");
+  $(".mid-reply").css("opacity","0.6");
+  $(".mid-reply").addClass('disabled');
+  swal('Comment was posted successfully');
+<% end %>

@@ -1,0 +1,24 @@
+<% @comments.each do |comment| %>
+  <div class="tweet tb">
+    <div class="tweet-1 mx-2">
+      <%= link_to user_path(comment.user) do %>
+        <img class="img user-img" src="<%= asset_path('user.png') %>" alt="">
+      <% end %>
+    </div>
+    <div class="tweet-2">
+      <div class="t-1">
+        <%= link_to user_path(comment.user), class: 'tweet-content' do %>
+          <span class="name"><%= comment.user.name %></span>
+          <span class="uname">@<%= comment.user.username %></span>
+        <% end %>
+        <span class="uname">1h</span>
+      </div>
+      <div class="t-1 replying">
+        <span class="uname">Replying to <%= link_to "@#{@tweet.user.username}", user_path(@tweet.user) %></span>
+      </div>
+      <div class="t-2">
+        <span class="content"><%= comment.content %></span>
+      </div>
+    </div>
+  </div>
+<% end %>

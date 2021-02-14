@@ -1,7 +1,10 @@
 class TweetsController < ApplicationController
 
+  before_action :find_tweet, only: [:show]
+
   def index
     @tweet = Tweet.new
+    @tweets = Tweet.includes(:user).order(updated_at: :desc)
   end
 
   def create
@@ -11,7 +14,15 @@ class TweetsController < ApplicationController
     end
   end
 
+  def show
+    @comments = @tweet.comments.includes(:user)
+  end
+
   private
+
+  def find_tweet
+    @tweet = Tweet.find_by(id: params[:id])
+  end
 
   def tweet_params
     params.permit(:content)

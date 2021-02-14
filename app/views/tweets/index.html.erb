@@ -20,63 +20,8 @@
       </div>
     <% end %>
     <div class="mt-2">
-      <div class="tweet tb">
-        <div class="tweet-1 mx-2">
-          <img class="img user-img" src="<%= asset_path('user.png') %>" alt="">
-        </div>
-        <div class="tweet-2">
-          <div class="t-1">
-            <span class="name">emir</span>
-            <span class="uname">@rimekod</span>
-            <span class="uname">1sa</span>
-          </div>
-          <div class="t-2">
-            <span class="content">This website is Clone of Twitter. Writter: rimekod. This website is Clone of Twitter. Writter: rimekod. This website is Clone of Twitter. Writter: rimekod. This website is Clone of Twitter. Writter: rimekod</span>
-          </div>
-          <div class="t-3">
-            <div>
-              <i class="far fa-comment"></i>
-              <span>12k</span>
-            </div>
-            <div>
-              <i class="fas fa-retweet rt"></i>
-              <span>12k</span>
-            </div>
-            <div>
-              <i class="far fa-heart fav"></i>
-              <span>12k</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tweet tb">
-        <div class="tweet-1">
-          <img class="img user-img" src="<%= asset_path('user.png') %>" alt="">
-        </div>
-        <div class="tweet-2">
-          <div class="t-1">
-            <span class="name">emir</span>
-            <span class="uname">@rimekod</span>
-            <span class="uname">1sa</span>
-          </div>
-          <div class="t-2">
-            <span class="content">This website is Clone of Twitter. Writter: rimekod. This website is Clone of Twitter. Writter: rimekod. This website is Clone of Twitter. Writter: rimekod. This website is Clone of Twitter. Writter: rimekod</span>
-          </div>
-          <div class="t-3">
-            <div>
-              <i class="far fa-comment"></i>
-              <span>12k</span>
-            </div>
-            <div>
-              <i class="fas fa-retweet rt"></i>
-              <span>12k</span>
-            </div>
-            <div>
-              <i class="far fa-heart fav"></i>
-              <span>12k</span>
-            </div>
-          </div>
-        </div>
+      <div id="tweet-feeds">
+        <%= render 'tweet_feeds' %>
       </div>
     </div>
   </div>
