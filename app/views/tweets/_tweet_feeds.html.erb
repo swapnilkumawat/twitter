@@ -1,3 +1,8 @@
 <% @tweets.each do |tweet| %>
+  <% retweeter_name = tweet.retweeter_name %>
+  <% if retweeter_name.present? %>
+    <% retweeter_name = retweeter_name == current_user.try(:name) ? 'You' : retweeter_name %>
+    <div class="t-1 mx-3"><span class="uname"><i class="fas fa-retweet"></i> <%= retweeter_name %> Retweeted</span></div>
+  <% end %>
   <%= render 'tweets/feed', tweet: tweet %>
 <% end %>

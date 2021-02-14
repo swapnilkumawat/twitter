@@ -1,6 +1,11 @@
 <div class="row">
   <div class="col-md-6 mx-auto mx-2">
     <div id="tweet-show">
+      <% retweeter_name = @tweet.retweeter_name %>
+      <% if retweeter_name.present? %>
+        <% retweeter_name = retweeter_name == current_user.try(:name) ? 'You' : retweeter_name %>
+        <div class="t-1 mx-3"><span class="uname"><i class="fas fa-retweet"></i> <%= retweeter_name %> Retweeted</span></div>
+      <% end %>
       <%= render 'tweet_show', tweet: @tweet %>
     </div>
     <div id="comments">

@@ -28,25 +28,6 @@ $(document).ready(function(){
     }
   });
 
-  $(".fav").click(function(){
-    var tweet_id = $(this).find('input').val();
-    $.ajax({
-      type: 'POST',
-      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-      url: '/tweets/' + tweet_id + '/likes',
-      data: {},
-      dataType: "script",
-      success: function () {
-      },
-      error: function () {
-      }
-    });
-  });
-
-  $(".rt").click(function(){
-    $(this).css("color","rgb(48, 185, 48)");
-  });
-
   $('.mid-tweet').click(function(){
     var content = $('.tweet-input').val();
     $.ajax({
@@ -78,3 +59,27 @@ $(document).ready(function(){
     });
   });
 });
+
+function incrementLikes(tweet_id) {
+  $.ajax({
+    type: 'POST',
+    beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+    url: '/tweets/' + tweet_id + '/likes',
+    success: function () {
+    },
+    error: function () {
+    }
+  });
+}
+
+function retweet(tweet_id) {
+  $.ajax({
+    type: 'POST',
+    beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+    url: '/tweets/' + tweet_id + '/retweet',
+    success: function () {
+    },
+    error: function () {
+    }
+  });
+}

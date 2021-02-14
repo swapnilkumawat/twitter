@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
 
-  before_action :find_tweet, only: [:show]
+  before_action :find_tweet, only: [:show, :retweet]
 
   def index
     @tweet = Tweet.new
@@ -16,6 +16,16 @@ class TweetsController < ApplicationController
 
   def show
     @comments = @tweet.comments.includes(:user)
+  end
+
+  def retweet
+    @retweet = @tweet.retweets.find_or_initialize_by(user_id: current_user.id)
+    if @retweet.persisted?
+      @retweet.destroy
+    else
+      @retweet.content = @tweet.content
+      @retweet.save
+    end
   end
 
   private

@@ -12,8 +12,8 @@
           <span class="uname">@<%= @user.username %></span>
         </div>
         <div>
-          <b><%= @user.tweets.count %></b><span class="text-15 mt-2 joined-date"> Tweets</span>,
-          <span class="text-15 mt-2 joined-date">&nbsp;<i class="fas fa-calendar-week"></i> Joined <%= @user.created_at.strftime("%B, %Y") %></span>
+          <b><%= @user.tweets.count %></b><span class="text-15 mt-2 joined-date"> Tweets</span>
+          <span class="text-15 mt-2 joined-date"><i class="fas fa-calendar-week"></i> Joined <%= @user.created_at.strftime("%d %B, %Y") %></span>
         </div>
       </div>
     </div>

@@ -1,12 +1,21 @@
 <div class="tweet tb">
   <div class="tweet-1 mx-2">
-    <img class="img user-img" src="<%= asset_path('user.png') %>" alt="">
+    <%= link_to user_path(tweet.user) do %>
+      <img class="img user-img" src="<%= asset_path('user.png') %>" alt="">
+    <% end %>
   </div>
   <div class="tweet-2">
     <div class="t-1">
-      <span class="name"><%= tweet.user.name %></span>
-      <span class="uname">@<%= tweet.user.username %></span>
+      <%  %>
+      <%= link_to user_path(tweet.user), class: 'tweet-content' do %>
+        <span class="name"><%= tweet.user.name %></span>
+      <% end %>
       <span class="uname"><%= time_ago_in_words(tweet.created_at) %></span>
+    </div>
+    <div class="t-1">
+      <%= link_to user_path(tweet.user), class: 'tweet-content' do %>
+        <span class="uname">@<%= tweet.user.username %></span>
+      <% end %>
     </div>
     <%= link_to tweet_path(tweet), class: 'tweet-content' do %>
       <div class="t-2">
@@ -14,26 +23,41 @@
       </div>
     <% end %>
     <div class="t-3">
-      <div class="cmt">
+      <div class="cmt" onclick="window.location = '/tweets/<%= tweet.id %>'">
         <i class="far fa-comment"></i>
-        <span><%= tweet.comments.count %></span>
+        <% comments_count = tweet.comments.count %>
+        <span><%= comments_count == 0 ? '' : comments_count %></span>
       </div>
-      <div class="rt">
-        <i class="fas fa-retweet"></i>
-        <%= hidden_field_tag :tweet_id, tweet.id %>
-        <span>12k</span>
-      </div>
-      <% if current_user && current_user.likes?(tweet) %>
-        <div class="fav liked">
-          <i class="fas fa-heart"></i>
-          <%= hidden_field_tag :tweet_id, tweet.id %>
-          <span><%= tweet.likes.active.count %></span>
+      <% retweets_count = tweet.retweets.count %>
+      <% if current_user && current_user.retweeted?(tweet) %>
+        <div class="rt rtd" onclick="retweet('<%= tweet.id %>');">
+          <i class="fas fa-retweet"></i>
+          <span><%= retweets_count == 0 ? '' : retweets_count %></span>
         </div>
       <% else %>
-        <div class="fav">
+        <% if current_user %>
+          <div class="rt" onclick="retweet('<%= tweet.id %>');">
+        <% else %>
+          <div class="rt" onclick="window.location = '/login'">
+        <% end %>
+          <i class="fas fa-retweet"></i>
+          <span><%= retweets_count == 0 ? '' : retweets_count %></span>
+        </div>
+      <% end %>
+      <% likes_count = tweet.likes.active.count %>
+      <% if current_user && current_user.likes?(tweet) %>
+        <div class="fav liked" onclick="incrementLikes('<%= tweet.id %>');">
+          <i class="fas fa-heart"></i>
+          <span><%= likes_count == 0 ? '' : likes_count %></span>
+        </div>
+      <% else %>
+        <% if current_user %>
+          <div class="fav" onclick="incrementLikes('<%= tweet.id %>');">
+        <% else %>
+          <div class="fav" onclick="window.location = '/login'">
+        <% end %>
           <i class="far fa-heart"></i>
-          <%= hidden_field_tag :tweet_id, tweet.id %>
-          <span><%= tweet.likes.active.count %></span>
+          <span><%= likes_count == 0 ? '' : likes_count %></span>
         </div>
       <% end %>
     </div>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :tweets do
     member do
+      post 'retweet'
       resources :comments
       resources :likes
     end
